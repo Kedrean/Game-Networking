@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8100319733560099100}
   - component: {fileID: 9134201511663609749}
   - component: {fileID: 1850469620178937176}
+  - component: {fileID: 7314513489326075444}
+  - component: {fileID: 7384535766921326368}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -162,8 +164,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -192,3 +194,35 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7314513489326075444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864203270602893206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a837a0c4b944d44a30ebcdad654b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraTarget
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &7384535766921326368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864203270602893206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0152747544aa7ec42bbc08ee3d48c20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerColorManager
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerRenderer: {fileID: 5644556325581503002}
+  playerMaterials:
+  - {fileID: 2100000, guid: b0127d7a3b626c149afc4033d78e6a10, type: 2}
+  - {fileID: 2100000, guid: fcdd1af23866bee4e90a08e2c60db0bc, type: 2}
+  - {fileID: 2100000, guid: 5a153ac0ad9511f44b0360b79affc8fb, type: 2}
+  - {fileID: 2100000, guid: e445824f529a83747817c53f3fb1497c, type: 2}
