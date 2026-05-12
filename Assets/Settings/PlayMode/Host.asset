@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15024, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Test
+  m_Name: Host
   m_EditorClassIdentifier: UnityEditor.MultiplayerModule.dll::Unity.Multiplayer.PlayMode.Editor.ScenarioConfig
   m_Description: 
   m_EnableEditors: 1
@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Nodes:
     - Main Editor|0_run
     - Main Editor|0_deploy
-    m_Role: 3
+    m_Role: 2
     m_PlayerTag: 
     m_InitialScene: {fileID: 0}
   m_EditorInstances: []
