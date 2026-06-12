@@ -1,16 +1,45 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class Bullet : MonoBehaviour
+public class Bullet : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public float speed = 15f;
+
+    private Rigidbody2D rb;
+    private float direction;
+
+    public override void OnNetworkSpawn()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+
+        if (IsServer)
+        {
+            
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Setup(float dir)
     {
-        
+        direction = dir;
+
+        if (!IsServer) return;
+
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        rb.linearVelocity =
+            new Vector2(direction * speed, 0f);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!IsServer) return;
+
+        if (other.TryGetComponent(out Health health))
+        {
+            health.ApplyDamage(25);
+        }
+
+        NetworkObject.Despawn();
     }
 }
