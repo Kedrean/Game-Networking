@@ -24,7 +24,8 @@ public class Health : NetworkBehaviour
 
     public void ApplyDamage(int damage)
     {
-        if (!IsServer) return;
+        if (!IsServer) 
+            return;
 
         health.Value -= damage;
 

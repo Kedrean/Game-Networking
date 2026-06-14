@@ -11,6 +11,9 @@ public class GameManager : NetworkBehaviour
     int redScore;
     int blueScore;
 
+    private NetworkVariable<bool> gameEnded =
+        new NetworkVariable<bool>(false);
+
     private void Awake()
     {
         Instance = this;
@@ -25,33 +28,49 @@ public class GameManager : NetworkBehaviour
 
     public void PlayerKilled(ulong deadPlayer)
     {
-        if (!IsServer) return;
+        if (!IsServer) 
+            return;
+
+        if (gameEnded.Value) 
+            return;
 
         if (deadPlayer == 0)
-            blueScore++;
-        else
             redScore++;
+        else
+            blueScore++;
 
         UpdateScoreClientRpc(
-            redScore,
-            blueScore);
-
-        if (redScore >= 5)
-            ShowWinnerClientRpc("RED WINS!");
+            blueScore,
+            redScore);
 
         if (blueScore >= 5)
+        {
+            gameEnded.Value = true;
             ShowWinnerClientRpc("BLUE WINS!");
+        }
+
+        if (redScore >= 5)
+        {
+            gameEnded.Value = true;
+            ShowWinnerClientRpc("RED WINS!");
+        }
+    }
+
+    public bool IsGameOver()
+    {
+        return gameEnded.Value;
     }
 
     [ClientRpc]
-    void UpdateScoreClientRpc(int red, int blue)
+    void UpdateScoreClientRpc(int blue, int red)
     {
-        UIManager.Instance.UpdateScore(red, blue);
+        UIManager.Instance.UpdateScore(blue, red);
     }
 
     [ClientRpc]
     void ShowWinnerClientRpc(string winner)
     {
+        gameEnded.Value = true;
         UIManager.Instance.ShowWinner(winner);
     }
 }

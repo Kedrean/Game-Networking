@@ -6,7 +6,8 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target == null) return;
+        if (target == null) 
+            return;
 
         transform.position =
             new Vector3(

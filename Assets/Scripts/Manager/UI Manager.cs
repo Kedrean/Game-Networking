@@ -16,16 +16,19 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        winnerText.gameObject.SetActive(false);
     }
 
-    public void UpdateScore(int red, int blue)
+    public void UpdateScore(int blue, int red)
     {
         scoreText.text =
-            $"Red: {red}   Blue: {blue}";
+            $"Blue: {blue}   Red: {red}";
     }
 
     public void ShowWinner(string text)
     {
+        winnerText.gameObject.SetActive(true);
         winnerText.text = text;
     }
 

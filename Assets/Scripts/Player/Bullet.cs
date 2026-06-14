@@ -4,6 +4,7 @@ using Unity.Netcode;
 public class Bullet : NetworkBehaviour
 {
     public float speed = 15f;
+    public float destroy = 25f;
 
     private Rigidbody2D rb;
     private float direction;
@@ -22,7 +23,8 @@ public class Bullet : NetworkBehaviour
     {
         direction = dir;
 
-        if (!IsServer) return;
+        if (!IsServer) 
+            return;
 
         if (rb == null)
             rb = GetComponent<Rigidbody2D>();
@@ -31,9 +33,21 @@ public class Bullet : NetworkBehaviour
             new Vector2(direction * speed, 0f);
     }
 
+    void Update()
+    {
+        if (!IsServer) 
+            return;
+
+        if (Mathf.Abs(transform.position.x) >= destroy)
+        {
+            NetworkObject.Despawn();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!IsServer) return;
+        if (!IsServer) 
+            return;
 
         if (other.TryGetComponent(out Health health))
         {
