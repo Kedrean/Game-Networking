@@ -7,7 +7,7 @@ public class GameManager : NetworkBehaviour
 
     [Header("Game Settings")]
     [SerializeField] private int pointsToWin = 50;
-
+    [SerializeField] private int playerCount = 2;
     public bool IsGameEnded => gameEnded;
 
     private bool gameEnded = false;
@@ -27,10 +27,24 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
+        if (!IsServer)
+            return;
+
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnClientConnected(ulong clientId)
+    {
+        if (NetworkManager.Singleton.ConnectedClientsIds.Count == playerCount)
         {
-            hostClientId = NetworkManager.Singleton.LocalClientId;
+            TimeManager.Instance.StartTimer();
         }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 
     //==========================================================

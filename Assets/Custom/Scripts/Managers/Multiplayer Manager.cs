@@ -16,7 +16,7 @@ public class MultiplayerManager : MonoBehaviour
 
     [Header("Relay Settings")]
     [SerializeField] private int maxPlayers = 2;
-    [SerializeField] private string connectionType = "dtls";
+    private const string ConnectionType = "wss";
 
     public string JoinCode { get; private set; }
 
@@ -87,7 +87,7 @@ public class MultiplayerManager : MonoBehaviour
                 NetworkManager.Singleton.GetComponent<UnityTransport>();
 
             transport.SetRelayServerData(
-                AllocationUtils.ToRelayServerData(allocation, connectionType));
+                AllocationUtils.ToRelayServerData(allocation, ConnectionType));
 
             bool success = NetworkManager.Singleton.StartHost();
 
@@ -123,7 +123,7 @@ public class MultiplayerManager : MonoBehaviour
                 NetworkManager.Singleton.GetComponent<UnityTransport>();
 
             transport.SetRelayServerData(
-                AllocationUtils.ToRelayServerData(allocation, connectionType));
+                AllocationUtils.ToRelayServerData(allocation, ConnectionType));
 
             bool success = NetworkManager.Singleton.StartClient();
 
