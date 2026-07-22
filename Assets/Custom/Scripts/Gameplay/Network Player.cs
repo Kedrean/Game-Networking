@@ -26,6 +26,12 @@ public class NetworkPlayer : NetworkBehaviour
         bool isLocal = IsOwner;
 
         Debug.Log(
+            $"{OwnerClientId} " +
+            $"localScale = {transform.localScale}" +
+            $" lossyScale = {transform.lossyScale}"
+        );
+
+        Debug.Log(
             $"NetworkPlayer Spawned | " +
             $"Object={gameObject.name} | " +
             $"OwnerClientId={OwnerClientId} | " +
